@@ -1,0 +1,18 @@
+FROM ubuntu:latest
+MAINTAINER gospodb_gospodb
+ENV DEBIAN_FRONTEND=noninteractive
+
+RUN	apt-get update -y && \
+	apt-get upgrade -y && \
+	apt-get install tzdata -y && \
+	apt-get install apache2 -y && \
+	echo "servername apache" | tee -a /etc/apache2/apache2.conf && \
+	service apache2 restart
+ 
+COPY socket.html /var/www/html/
+
+RUN	mv /var/www/html/socket.html /var/www/html/index.html
+	
+EXPOSE 80/tcp
+CMD ["apache2ctl", "-D", "FOREGROUND"]
+

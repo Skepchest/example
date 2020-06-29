@@ -1,0 +1,16 @@
+FROM ubuntu:latest
+MAINTAINER gospodb_gospodb
+ENV DEBIAN_FRONTEND=noninteractive
+COPY server.py /srv/
+
+RUN	apt-get update -y && \
+	apt-get upgrade -y && \
+	apt-get install python3 -y && \
+	apt-get install python3-pip -y && \
+	pip3 install websocket && \
+	pip3 install websockets
+###	python3 /srv/server.py
+	
+EXPOSE 666/tcp
+CMD ["bash"]
+
