@@ -9,8 +9,7 @@ RUN	apt-get update -y && \
 	apt-get install python3-pip -y && \
 	pip3 install websocket && \
 	pip3 install websockets
-###	python3 /srv/server.py
-	
+
 EXPOSE 666/tcp
-CMD ["bash"]
+CMD python3 /srv/server.py
 

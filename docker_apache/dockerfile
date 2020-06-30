@@ -13,6 +13,6 @@ COPY socket.html /var/www/html/
 
 RUN	mv /var/www/html/socket.html /var/www/html/index.html
 	
-EXPOSE 80/tcp
+EXPOSE 80/tcp, 666/tcp
 CMD ["apache2ctl", "-D", "FOREGROUND"]
 

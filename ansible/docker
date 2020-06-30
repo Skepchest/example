@@ -1,0 +1,27 @@
+#!/bin/bash
+
+docker system prune --force
+
+docker pull ubuntu:latest
+id_u=$(docker images -q)
+
+docker build /root/example/docker_apache/
+
+id_w=$(docker images -q)
+echo $id_w >> magic
+sed -i 's/ '$id_u' //' magic
+id_w=$(cat magic)
+
+docker create -it --name web -p 80:80 $id_w apache2ctl -D FOREGROUND
+docker start web
+
+docker build /root/example/docker_python/
+
+id_p=$(docker images -q)
+echo $id_p >> focus
+sed -i 's/ '$id_u' //' focus
+sed -i 's/ '$id_w' //' focus
+id_p=$(cat focus)
+
+docker create -it --name python -p 666:666 $id_p python3 /srv/server.py
+docker start python
