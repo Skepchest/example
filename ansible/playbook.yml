@@ -12,21 +12,30 @@
 
     - name: file_absent_git
       file: dest=/root/example state=absent
+      ignore_errors: yes
 
     - name: git_clone_my_repositiory
       shell: git clone https://github.com/Skepchest/example.git
+      ignore_errors: yes
 
-#    - name: clean_docker
-#      shell: docker system prune -y
-
+###
     - name: build_apache
       shell: docker build /root/example/docker_apache/
 
-    - name: delete_ubuntu
-      shell: docker rmi images ubuntu
-      ignore_errors: yes
-###
+#   - name: Context_interactive
+#     shell: read -p "Enter generated image: "... 
 
+
+#    - name: delete_ubuntu
+#      shell: docker rmi images ubuntu
+#      ignore_errors: yes
+
+
+
+# task of deal script, by fetchet to repository
+# script does have $var and must be work by some experamental of adding users
+# now i have method by we can get name of generating images for containers
+# i hope it will work better than in playbook
 
     - name: try
       shell: idw=""
@@ -62,4 +71,4 @@
 
     - name: start_python_container
       shell: docker start python
-
+###
