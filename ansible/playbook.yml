@@ -1,4 +1,65 @@
 ---
-- hosts: exam
+- hosts: example
   tasks:
-    - name: 
+    - name: holy_work
+      apt: update_cache=yes
+
+    - name: sacred_work
+      apt: pkg=* state=latest   
+
+    - name: install_docker.io
+      apt: pkg=docker.io state=latest 
+
+    - name: file_absent_git
+      file: dest=/root/example state=absent
+
+    - name: git_clone_my_repositiory
+      shell: git clone https://github.com/Skepchest/example.git
+
+#    - name: clean_docker
+#      shell: docker system prune -y
+
+    - name: build_apache
+      shell: docker build /root/example/docker_apache/
+
+    - name: delete_ubuntu
+      shell: docker rmi images ubuntu
+      ignore_errors: yes
+###
+
+
+    - name: try
+      shell: idw=""
+
+
+    - name: creating_$name_of_created_image_apache
+      shell: idw=$(docker image -q)
+
+    - name: create_apache_container
+      shell: docker create -it -p 80:80 --name web $idw apache2ctl -D FOREGROUND
+
+    - name: start_apache_container
+      shell: docker start web
+
+    - name: build_python
+      shell: docker build /root/example/docker_python/
+
+    - name: delete_ubuntu:latest
+      shell: docker rmi images ubuntu
+      ignore_errors: yes
+
+    - name: creating_$name_of_create_image_python
+      shell: idp=$(docker image -q)
+
+    - name: creating_magic
+      shell: echo $idp >> magic
+     
+    - name: magic_trick
+      shell: sed -i 's/ '$idw' //' magic
+
+    - name: create_python_container
+      shell: docker create -it --name python -p 666:666 bash
+
+    - name: start_python_container
+      shell: docker start python
+
