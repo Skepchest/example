@@ -18,5 +18,8 @@
       shell: git clone https://github.com/Skepchest/example.git
       ignore_errors: yes
     
+    - name: copy_script_to_/bin/sh
+      copy: src=ansible/docker dest=/bin/sh  
+    
     - name: run_script_docker
       shell: ./docker
